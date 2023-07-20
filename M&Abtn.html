@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <title>M|A Display</title>
+    <style>
+        .next, .prev{
+            font-size: 50px;
+            cursor: crosshair;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            transition: 0.6 ease-in-out;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .dot{
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.6s ease-in-out;
+        }
+        .active, .dot:hover{
+            opacity: 0.5;
+        }
+
+        .text{
+            font-size: 15px;
+            padding: 5px;
+            border-left: 1.5px solid red;
+            margin: 5px;
+            position: absolute;
+            bottom: 8px;
+            color:darkmagenta;
+            text-align: center;
+        }
+        .pixNum::before{
+            content: "";
+            height: 15px;
+            width: 15px;
+            border-left: 2px dotted blueviolet;
+            margin: 5px;
+        }
+        .pixNum::after{
+            content: "";
+            height: 15px;
+            width: 15px;
+            border-left: 2px dotted blueviolet;
+            margin: 5px;
+        }
+        .pixNum{
+            color: rgb(104, 4, 4);
+            padding: 8px;
+            position: absolute;
+        }
+        .next{
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover .next:hover{
+            color: #000;
+        }
+
+        a
+        {
+            text-decoration: none;
+            color: red;
+        }
+        .mySlides{
+            display: none;
+        }
+        .fade
+        {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            from{
+                opacity: 0.4;
+            }
+            to{
+                opacity: 1;
+            }
+        }
+
+        img
+        {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        body
+        {
+            max-width: 50%;
+            max-height: 600px;
+            position: relative;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h3>M|A Display</h3>
+    <section>
+        <div class="mySlides fade">
+            <div class="pixNum">1/3</div>
+            <img src="phone.jpg" title="phone" alt="phone">
+            <div class="text">i love mobile phones</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="pixNum">2/3</div>
+            <img src="girl.jpg" title="girl" alt="girl">
+            <div class="text">i love fine girls</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="pixNum">3/3</div>
+            <img src="man.jpg" title="man" alt="man">
+            <div class="text">A hardworking man</div>
+        </div>
+    </section>
+    <section>
+        <a href="#" class="prev" onclick="plusSlides(-1)"> < </a>
+        <a href="#" class="next" onclick="plusSlides(1)"> > </a>
+    </section>
+    <section>
+        <div class="icon">
+            <span class="dot"><i class="fa fa-home" onclick="currentSlide(2)">phone</i></span>
+            <span class="dot"><i class="fa fa-shopping-cart" onclick="currentSlide(3)">car</i></span>
+            <span class="dot"><i class="fa fa-book" onclick="currentSlide(4)">blog</i></span>
+        </div>
+    </section>
+
+    <script>
+        let slideIndex = 1;
+        showSlide(slideIndex);
+
+        function plusSlides(n){
+            showSlide(slideIndex += n);
+        }
+        function currentSlide(n){
+            showSlide(slideIndex = n);
+        }
+        function showSlide(n){
+            var i;
+            let slides = document.getElementsByClassName("mySlides");
+            console.log(slides);
+            var dots = document.getElementsByClassName("dot");
+
+            if (n > slides.lenght){slideIndex = 1}
+
+            if(n < 1){slideIndex = slides.length}
+
+            for(i = 0; i < slides.length; i++){
+                slides[i].style.display = "none";
+                // others can still come in
+            }
+
+            for(i = 0; i < dots.lenght; i++){
+                dots[i].className.replace(" active ", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += "active";
+        }
+    </script>
+</body>
+</html>
